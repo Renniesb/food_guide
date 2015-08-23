@@ -1,13 +1,18 @@
 $(function(){
 
 var SearchList = Backbone.Collection.extend({
-    url: "https://api.nutritionix.com/v1_1/search/taco?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id&appId=26952a04&appKey=78e2b31849de080049d26dc6cf4f338c",
 
     initialize: function(){
         this.bind("reset", function(model, options){
         console.log("Inside event");
         console.log(model);
         });
+    },
+    //** 1. Function "parse" is a Backbone function to parse the response properly
+    parse:function(response){
+        //** return the array inside response, when returning the array
+        //** we left to Backone populate this collection
+        return response.hits;
     }
 
 });
@@ -15,39 +20,53 @@ var SearchList = Backbone.Collection.extend({
 // The main view of the application
 var App = Backbone.View.extend({
 
+
+
     initialize: function () {
 
-        this.collection = new SearchList();
+        this.model = new SearchList();
 
-        this.collection.fetch({
+        this.list = $('#listing');
+
+    },
+    el: 'input',
+
+    events: {
+
+    "keyup" : "prepCollection"
+    },
+    prepCollection: function(){
+        var name = $('input').val();
+        var newUrl = "https://api.nutritionix.com/v1_1/search/" + name + "?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name%2Cbrand_name%2Citem_id%2Cbrand_id&appId=26952a04&appKey=33b9262901d0068d4895736b5af19805";
+
+       if (name == ""){
+        this.list.html("")
+       }
+       else{
+        this.model.url = newUrl;
+        this.model.fetch({
             success: function (response, xhr) {
                 console.log("Inside success");
                 console.log(response.toJSON());
             },
-            ERROR: function (errorResponse) {
+            error: function (errorResponse) {
                 console.log(errorResponse)
             }
         });
-
-        this.listenTo(this.collection, 'sync', this.render);
-
-
-        this.list = $('#listing');
-
+        this.listenTo(this.model, 'sync', this.render);
+       }
 
     },
 
     render: function(){
-
-        var context = this;
-        this.collection.each(function (term) {
-            _.each(term.get('hits'), function (item) {
-                context.list.append("<li>" + item.fields.brand_name + "</li>");
-            });
-
+        var terms = this.model;
+        var wordhtml = "";
+        terms.each(function (term) {
+            wordhtml = wordhtml + "<li>" +"Food Name: " + term.get('fields')["item_name"] + '<br/>' +'Brand Name: '+ term.get('fields')["brand_name"] + "</li>"
         }, this);
+        this.list.html(wordhtml);
 
     }
 });
-        new App();
+       var app = new App();
 });
