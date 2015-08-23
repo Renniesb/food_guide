@@ -12,11 +12,21 @@
   </head>
   <body>
     <div class="container">
-        <h1>Interactive Food Guide</h1>
-        <div>
-            <input type="text" id="searchBox"> <br/><br/>
+        <div class="row">
+            <div class="col-xs-6">
+                <h1>Interactive Food Guide</h1>
+                <input type="text" id="searchBox"> <br/><br/>
+                <ul id="listing"></ul>
+            </div>
+
+            <div class="col-xs-6">
+                <h1>Foods Tracked</h1>
+                <ul id="tracked"></ul>
+                <p id="total">total calories: <span>0</span></p>
+            </div>
         </div>
-        <ul id="listing"></ul>
+
+
     </div>
 
 
