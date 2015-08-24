@@ -31,9 +31,10 @@ var App = Backbone.View.extend({
 
         this.model = new SearchList();
         this.prepCollection =_.debounce(this.prepCollection, 1000);
-
+        this.$total = $('#total span');
+        this.total = 0;
         this.$list = $('#listing');
-        // this.saved =$('#tracked');
+        this.$tracked =$('#tracked');
 
     },
 
@@ -60,15 +61,25 @@ var App = Backbone.View.extend({
 
     },
 
-    // track: function(){
-    // },
+     track: function(e){
+        var $target = $(e.currentTarget);
+        var item_name = $target.attr('data-name');
+        var brand_name = $target.attr('data-brand');
+        var calories = $target.attr('data-calories');
+
+
+        this.$tracked.append( "<li><strong>" + item_name +'</strong>'+ ' (' + brand_name + ')' +' - ' + calories + " calories </li>" );
+        this.total += parseInt(calories);
+        this.$total.text(this.total);
+
+     },
 
 
     render: function(){
         var terms = this.model;
-        var wordhtml = "";
+        var wordhtml = '';
         terms.each(function (term) {
-            wordhtml = wordhtml + "<li>" +"<strong>" + term.get('fields')["item_name"] + '</strong>'+ ' ('+ term.get('fields')["brand_name"] + ')'+' - '+ term.get('fields')["nf_calories"] + ' Calories' + "</li>"
+            wordhtml = wordhtml + '<li data-name=' + '"' + term.get('fields')['item_name'] +'"'+ ' data-brand='+'"' + term.get('fields')['brand_name'] + '"' + ' data-calories='+ '"' + term.get('fields')['nf_calories'] + '"' + '>' +"<strong>" + term.get('fields')["item_name"] + '</strong>'+ ' ('+ term.get('fields')["brand_name"] + ')'+' - '+ term.get('fields')["nf_calories"] + ' Calories' + "</li>"
         }, this);
         this.$list.html(wordhtml);
 
