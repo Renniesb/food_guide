@@ -37,7 +37,7 @@ var App = Backbone.View.extend({
 
     events: {
     "input #searchBox" : "prepCollection",
-    "click li" : "track"
+    "click #listing li" : "track"
     },
 
     initialize: function () {
