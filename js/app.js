@@ -1,6 +1,7 @@
 $(function(){
 
 var Food = Backbone.Model.extend({
+
         defaults:{
             title: 'no information found',
             brand: 'no information found',
@@ -37,7 +38,8 @@ var App = Backbone.View.extend({
 
     events: {
     "input #searchBox" : "prepCollection",
-    "click #listing li" : "track"
+    "click #listing li" : "track",
+    "click button": "buttonClicked"
     },
 
     initialize: function () {
@@ -48,6 +50,36 @@ var App = Backbone.View.extend({
         this.$total = $('#total span');
         this.$list = $('#listing');
         this.$tracked =$('#tracked');
+
+
+    },
+
+    buttonClicked: function(e) {
+        var $target = $(e.currentTarget).parent();
+       var $selected = $target.find('#mySelect').val();
+
+        var location = $target.attr('data-id');
+        var currentFood = this.foods.get(location);
+
+
+        switch($selected) {
+            case 'Breakfast':
+                $('#breakfast').append(currentFood.get('html'));
+                break;
+            case 'Lunch':
+                $('#lunch').append(currentFood.get('html'));
+                break;
+            case 'Dinner':
+                $('#dinner').append(currentFood.get('html'));
+                break;
+            case 'Snack':
+                $('#snack').append(currentFood.get('html'));
+                break;
+            default:
+                alert("Error: try again");
+        }
+
+
 
 
     },
@@ -85,28 +117,27 @@ var App = Backbone.View.extend({
         var brand_name = $target.attr('data-brand');
         var calorieString = $target.attr('data-calories');
         var calorieAmt = parseFloat(calorieString);
+        var foodid = $target.attr('data-id');
+
+        var chooseday ='<form>What meal was this part of?: <select id="mySelect"> <option value="Breakfast">Breakfast</option><option value="Lunch">Lunch</option><option value="Dinner">Dinner</option><option value="Snack">Snack</option></select></form><button type="button">Add To Meal</button>';
+
+        var trackedhtml = '<li'+' data-id='+'"'+ foodid +'"'+'>' +"<strong>" + item_name + '</strong>'+ ' ('+ brand_name + ')'+' - '+ calorieAmt + ' Calories' + chooseday + '</li>'
 
 
-        this.foods.add(new Food({ title: item_name, brand: brand_name, calories: calorieAmt}));
-
-
-
-
-
-
+        this.foods.add(new Food({ id: foodid, title: item_name, brand: brand_name, calories: calorieAmt, html: trackedhtml}));
 
     },
 
     renderfoods: function() {
         var total = 0;
         var trackedhtml = '';
+
        this.foods.each(function(food){
-            trackedhtml = trackedhtml + '<li>'+"<strong>" + food.get('title') + '</strong>'+ ' ('+ food.get('brand') + ')'+' - '+ food.get('calories') + ' Calories' + '</li>'
+            trackedhtml = trackedhtml + food.get('html');
             total += food.get('calories');
        },this)
-
-       this.$tracked.html(trackedhtml);
-       this.$total.text(total);
+        this.$tracked.html(trackedhtml);
+         this.$total.html(total);
 
 
 
@@ -116,7 +147,7 @@ var App = Backbone.View.extend({
         var terms = this.model;
         var wordhtml = '';
         terms.each(function (term) {
-            wordhtml = wordhtml + '<li data-name=' + '"' + term.get('fields')['item_name'] +'"'+ ' data-brand='+'"' + term.get('fields')['brand_name'] + '"' + ' data-calories='+ '"' + term.get('fields')['nf_calories'] + '"' + '>' +"<strong>" + term.get('fields')["item_name"] + '</strong>'+ ' ('+ term.get('fields')["brand_name"] + ')'+' - '+ term.get('fields')["nf_calories"] + ' Calories' + '</li>'
+            wordhtml = wordhtml + '<li' + ' data-id=' + '"' + term.get('_id') +'"'+' data-name=' + '"' + term.get('fields')['item_name'] +'"'+ ' data-brand='+'"' + term.get('fields')['brand_name'] + '"' + ' data-calories='+ '"' + term.get('fields')['nf_calories'] + '"' + '>' +"<strong>" + term.get('fields')["item_name"] + '</strong>'+ ' ('+ term.get('fields')["brand_name"] + ')'+' - '+ term.get('fields')["nf_calories"] + ' Calories' + '</li>'
         }, this);
         this.$list.html(wordhtml);
 
