@@ -1,5 +1,18 @@
 $(function(){
 
+var Food = Backbone.Model.extend({
+        defaults:{
+            title: 'no information found',
+            brand: 'no information found',
+            calories: 'no information found',
+            day: 'all'
+        }
+});
+
+var AllFoods = Backbone.Collection.extend({model: Food});
+
+
+
 var SearchList = Backbone.Collection.extend({
 
     initialize: function(){
@@ -30,11 +43,12 @@ var App = Backbone.View.extend({
     initialize: function () {
 
         this.model = new SearchList();
+        this.foods = new AllFoods();
         this.prepCollection =_.debounce(this.prepCollection, 1000);
         this.$total = $('#total span');
-        this.total = 0;
         this.$list = $('#listing');
         this.$tracked =$('#tracked');
+
 
     },
 
@@ -61,25 +75,48 @@ var App = Backbone.View.extend({
 
     },
 
-     track: function(e){
+    track: function(e){
+
+
+        this.listenTo(this.foods, 'add', this.renderfoods);
+
         var $target = $(e.currentTarget);
         var item_name = $target.attr('data-name');
         var brand_name = $target.attr('data-brand');
-        var calories = $target.attr('data-calories');
+        var calorieString = $target.attr('data-calories');
+        var calorieAmt = parseFloat(calorieString);
 
 
-        this.$tracked.append( "<li><strong>" + item_name +'</strong>'+ ' (' + brand_name + ')' +' - ' + calories + " calories </li>" );
-        this.total += parseInt(calories);
-        this.$total.text(this.total);
+        this.foods.add(new Food({ title: item_name, brand: brand_name, calories: calorieAmt}));
 
-     },
 
+
+
+
+
+
+    },
+
+    renderfoods: function() {
+        var total = 0;
+        var trackedhtml = '';
+       this.foods.each(function(food){
+            trackedhtml = trackedhtml + '<li>'+"<strong>" + food.get('title') + '</strong>'+ ' ('+ food.get('brand') + ')'+' - '+ food.get('calories') + ' Calories' + '</li>'
+            total += food.get('calories');
+       },this)
+
+       this.$tracked.html(trackedhtml);
+       this.$total.text(total);
+
+
+
+    },
 
     render: function(){
         var terms = this.model;
         var wordhtml = '';
         terms.each(function (term) {
-            wordhtml = wordhtml + '<li data-name=' + '"' + term.get('fields')['item_name'] +'"'+ ' data-brand='+'"' + term.get('fields')['brand_name'] + '"' + ' data-calories='+ '"' + term.get('fields')['nf_calories'] + '"' + '>' +"<strong>" + term.get('fields')["item_name"] + '</strong>'+ ' ('+ term.get('fields')["brand_name"] + ')'+' - '+ term.get('fields')["nf_calories"] + ' Calories' + "</li>"
+            wordhtml = wordhtml + '<li data-name=' + '"' + term.get('fields')['item_name'] +'"'+ ' data-brand='+'"' + term.get('fields')['brand_name'] + '"' + ' data-calories='+ '"' + term.get('fields')['nf_calories'] + '"' + '>' +"<strong>" + term.get('fields')["item_name"] + '</strong>'+ ' ('+ term.get('fields')["brand_name"] + ')'+' - '+ term.get('fields')["nf_calories"] + ' Calories' + '</li>'
         }, this);
         this.$list.html(wordhtml);
 
