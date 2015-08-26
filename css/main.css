@@ -7,51 +7,26 @@ font-family: 'Lato', sans-serif;
 word-wrap: break-word;
 }
 
-
-.link{
-	color: #747704
+.bg-black{
+	background-color: black;
+	color: white;
 }
-
-.subtitle{
-	margin-right: 18%;
-}
-
-.title2 {
-	
-	font-weight: bold;
-	margin-top: 35px;
-	margin-bottom: 20px;	
+.bg-blue {
+	background-color: #354b59;
+	color: white;
 
 }
 
-.title-logo {
-	width: 100px;
-	height:100px;
-	margin-top: 20px;
+.bg-blue h1,.bg-blue h2 {
+	font-family: Impact, Charcoal, sans-serif;
+	letter-spacing: 3px;
+}
+.bg-blue input,.bg-blue select, .bg-blue button {
+	color: black;
 }
 
-.title{
-	font-family: 'Cinzel', serif;
-	margin-top: 40px;
-}
-
-
-.title-super{
-	font-size: 45px;
-
-}
-
-.rounded-corners{
-	border-radius: 8px;
-
-}
-
-
-
-hr {
-	height: 4px;
-	background-color: #BCBBBB;
-	margin-top: 6px;
-	margin-bottom: 40px;
+.bg-white{
+	color: #354b59;
+	background-color: white;
 }
 

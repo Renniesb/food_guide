@@ -9,48 +9,94 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-6">
-                <h1>Interactive Food Guide</h1>
-                <input type="text" id="searchBox"> <br/><br/>
-                <ul id="listing"></ul>
-            </div>
 
-            <div class="col-xs-6">
-                <h1>Foods Tracked</h1>
-                <ul id="tracked"></ul>
-                <p id="total"><strong> total calories:</strong> <span>0</span></p>
+    <div class="text-center bg-black">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1>Interactive Food Guide</h1>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class=" text-center col-xs-12">
-                <ul id="breakfast"></ul>
+    </div>
+    <div class="bg-blue">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Food Search</h2>
+                    <img class="img-responsive" src="img/my-food-guide-plate.jpg" alt="food plate photo">
+                    <h4>Look up food here:</h4>
+                    <input type="text" id="searchBox"> <br/><br/>
+                    <p id="instruct"></p>
+                    <ul id="listing"></ul>
+                </div>
+                <div class="col-sm-6">
+                    <h2>Foods Tracked</h2>
+                    <ul id="tracked"></ul>
+                    <p id="total"><strong> total calories:</strong> <span>0</span></p>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <ul id="lunch"></ul>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <ul id="dinner"></ul>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-12">
-                <ul id="snack"></ul>
-            </div>
-            <!-- TODO: Put food pyramid here -->
-        </div>
-
-
     </div>
 
+    <div class="bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1>Breakfast</h1>
+                    <ul id="breakfast"></ul>
+                </div>
+                <div class="col-sm-6">
+                    <img class="img-responsive" src="img/breakfast-meal.jpg" alt="breakfast plate photo">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-blue">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1>Lunch</h1>
+                    <ul id="lunch"></ul>
+                </div>
+                <div class="col-sm-6">
+                    <img class="img-responsive" src="img/lunch-meal.jpg" alt="lunch plate photo">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1>Dinner</h1>
+                    <ul id="dinner"></ul>
+                </div>
+                <div class="col-sm-6">
+                    <img class="img-responsive" src="img/dinner-meal.jpg" alt="dinner plate photo">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-blue">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1>Snack</h1>
+                    <ul id="snack"></ul>
+                </div>
+                <div class="col-sm-6">
+                    <img class="img-responsive" src="img/snack-meal.jpg" alt="snack plate photo">
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
