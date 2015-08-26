@@ -17,6 +17,11 @@ word-wrap: break-word;
 
 }
 
+.bg-blue li:hover {
+	background-color: #1c4587;;
+
+}
+
 .bg-blue h1,.bg-blue h2 {
 	font-family: Impact, Charcoal, sans-serif;
 	letter-spacing: 3px;
