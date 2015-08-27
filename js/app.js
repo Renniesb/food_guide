@@ -52,7 +52,8 @@ var App = Backbone.View.extend({
         this.$list = $('#listing');
         this.$instruct = $('#instruct');
         this.$tracked =$('#tracked');
-
+        this.listenTo(this.foods, 'add', this.renderfoods);
+        this.listenTo(this.foods, 'remove', this.renderfoods);
 
     },
 
@@ -102,7 +103,7 @@ var App = Backbone.View.extend({
         this.$instruct.html("")
        }
        else{
-        this.$instruct.html("Click On A Food Item To Track It")
+        this.$instruct.html("Click On A Food Item To Track It");
         this.model.url = newUrl;
         this.model.fetch({
             success: function (response, xhr) {
@@ -121,7 +122,7 @@ var App = Backbone.View.extend({
     track: function(e){
 
 
-        this.listenTo(this.foods, 'add', this.renderfoods);
+
 
         var $target = $(e.currentTarget);
         var item_name = $target.attr('data-name');
