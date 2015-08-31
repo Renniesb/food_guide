@@ -5,8 +5,17 @@
 body{
 font-family: 'Lato', sans-serif;
 word-wrap: break-word;
+
+}
+.top-space{
+	margin-top:20px;
+
 }
 
+.bottom-space{
+	margin-bottom: 10px;
+
+}
 .bg-black{
 	background-color: black;
 	color: white;
@@ -28,6 +37,7 @@ word-wrap: break-word;
 }
 .bg-blue input,.bg-blue select, .bg-blue button {
 	color: black;
+
 }
 
 .bg-white{
@@ -35,3 +45,20 @@ word-wrap: break-word;
 	background-color: white;
 }
 
+.spacetracked{
+	max-width: 498px;
+	max-height: 335px;
+	overflow: scroll;
+
+}
+
+.spacefood{
+	max-width: 498px;
+	max-height: 335px;
+	overflow: scroll;
+}
+
+.spacetracked li {
+
+	margin-bottom: 10px;
+}

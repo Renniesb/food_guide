@@ -10,7 +10,11 @@ var Food = Backbone.Model.extend({
         }
 });
 
-var AllFoods = Backbone.Collection.extend({model: Food});
+var AllFoods = Backbone.Firebase.Collection.extend({
+    model: Food,
+    url: "https://blinding-torch-8751.firebaseio.com/"
+
+});
 
 
 
@@ -91,7 +95,8 @@ var App = Backbone.View.extend({
         var $target = $(e.currentTarget).parent();
         var removeid = $target.attr('data-id');
         $target.remove();
-        this.foods.remove(removeid);
+        var modelRemoved = this.foods.get(removeid);
+        this.foods.remove(modelRemoved);
     },
 
     prepCollection: function(){
@@ -136,7 +141,7 @@ var App = Backbone.View.extend({
         var trackedhtml = '<li'+' data-id='+'"'+ foodid +'"'+'>' +"<strong>" + item_name + '</strong>'+ ' ('+ brand_name + ')'+' - '+ calorieAmt + ' Calories' + chooseday + '</li>'
 
 
-        this.foods.add(new Food({ id: foodid, title: item_name, brand: brand_name, calories: calorieAmt, html: trackedhtml}));
+        this.foods.create(new Food({ id: foodid, title: item_name, brand: brand_name, calories: calorieAmt, html: trackedhtml}));
 
     },
 
@@ -167,6 +172,3 @@ var App = Backbone.View.extend({
 });
        var app = new App();
 });
-
-
-// TODO: click event triggers render of saved elements with calorie count

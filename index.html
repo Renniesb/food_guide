@@ -28,15 +28,20 @@
                 <div class="col-sm-6">
                     <h2>Food Search</h2>
                     <img class="img-responsive" src="img/my-food-guide-plate.jpg" alt="food plate photo">
+                    <a name="foodsearch"></a>
                     <h4>Look up food here:</h4>
                     <input type="text" id="searchBox"> <br/><br/>
                     <p id="instruct"></p>
-                    <ul id="listing"></ul>
+                    <ul class="spacefood" id="listing"></ul>
+                    <a href="#foodtrack">Go to food tracking</a>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6 top-space bottom-space">
+                    <img class="img-responsive" src="img/foods.jpg" alt="foods">
+                    <a name="foodtrack"></a>
                     <h2>Foods Tracked</h2>
-                    <ul id="tracked"></ul>
+                    <ul class="top-space spacetracked" id="tracked"></ul>
                     <p id="total"><strong> total calories:</strong> <span>0</span></p>
+                    <a href="#foodsearch">Go to food search</a>
                 </div>
             </div>
         </div>
@@ -47,10 +52,11 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h1>Breakfast</h1>
-                    <ul id="breakfast"></ul>
+                    <ul class="spacetracked" id="breakfast"></ul>
                 </div>
                 <div class="col-sm-6">
                     <img class="img-responsive" src="img/breakfast-meal.jpg" alt="breakfast plate photo">
+                    <a href="#foodsearch">Return to food search</a> <p><a href="#foodtrack">Return to food tracking</a></p>
                 </div>
             </div>
         </div>
@@ -61,10 +67,11 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h1>Lunch</h1>
-                    <ul id="lunch"></ul>
+                    <ul class="spacetracked" id="lunch"></ul>
                 </div>
                 <div class="col-sm-6">
                     <img class="img-responsive" src="img/lunch-meal.jpg" alt="lunch plate photo">
+                    <a href="#foodsearch">Return to food search</a> <p><a href="#foodtrack">Return to food tracking</a></p>
                 </div>
             </div>
         </div>
@@ -75,10 +82,11 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h1>Dinner</h1>
-                    <ul id="dinner"></ul>
+                    <ul class="spacetracked" id="dinner"></ul>
                 </div>
                 <div class="col-sm-6">
                     <img class="img-responsive" src="img/dinner-meal.jpg" alt="dinner plate photo">
+                    <a href="#foodsearch">Return to food search</a> <p><a href="#foodtrack">Return to food tracking</a></p>
                 </div>
             </div>
         </div>
@@ -89,10 +97,11 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h1>Snack</h1>
-                    <ul id="snack"></ul>
+                    <ul class="spacetracked" id="snack"></ul>
                 </div>
                 <div class="col-sm-6">
                     <img class="img-responsive" src="img/snack-meal.jpg" alt="snack plate photo">
+                    <a href="#foodsearch">Return to food search</a> <p><a href="#foodtrack">Return to food tracking</a></p>
                 </div>
             </div>
         </div>
@@ -108,5 +117,9 @@
     <script src="js/app.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
+    <!-- BackboneFire -->
+    <script src="https://cdn.firebase.com/libs/backbonefire/0.5.1/backbonefire.min.js"></script>
   </body>
 </html>
