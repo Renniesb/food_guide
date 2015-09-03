@@ -12,27 +12,27 @@ $(function() {
 
     var AllFoods = Backbone.Firebase.Collection.extend({
         model: Food,
-        url: "https://blinding-torch-8751.firebaseio.com/"
+        url: "https://blinding-torch-8751.firebaseio.com/allfoods"
 
     });
     var Breakfast = Backbone.Firebase.Collection.extend({
         model: Food,
-        url: "https://blinding-torch-8751.firebaseio.com/"
+        url: "https://blinding-torch-8751.firebaseio.com/breakfast"
 
     });
     var Lunch = Backbone.Firebase.Collection.extend({
         model: Food,
-        url: "https://blinding-torch-8751.firebaseio.com/"
+        url: "https://blinding-torch-8751.firebaseio.com/lunch"
 
     });
     var Dinner = Backbone.Firebase.Collection.extend({
         model: Food,
-        url: "https://blinding-torch-8751.firebaseio.com/"
+        url: "https://blinding-torch-8751.firebaseio.com/dinner"
 
     });
     var Snack = Backbone.Firebase.Collection.extend({
         model: Food,
-        url: "https://blinding-torch-8751.firebaseio.com/"
+        url: "https://blinding-torch-8751.firebaseio.com/snack"
 
     });
 
@@ -104,7 +104,7 @@ $(function() {
             var currenthtml = currentFood.get('html');
 
             //replaces class in order to use it later to specifically target items in a specific meal collection
-            currenthtml.removeClass('alltracked').addClass($selected);
+            //currenthtml.removeClass('alltracked').addClass($selected);
 
             switch ($selected) {
                 case 'Breakfast':
@@ -131,23 +131,27 @@ $(function() {
         removeClicked: function(e) {
             var $target = $(e.currentTarget).parent();
             var removeid = $target.attr('data-id');
-            $target.remove();
             var modelRemoved = this.foods.get(removeid);
-            var addedClass = $target.attr('class');
+            var currentmeal = $target.parent();
+            var currentid = currentmeal.attr('id');
             this.foods.remove(modelRemoved);
 
-            //uses the added class to remove from the correct collection
-            switch (addedClass) {
-                case 'Breakfast':
+
+            switch (currentid) {
+                case 'breakfast':
+                    modelRemoved = this.breakfastlist.get(removeid);
                    this.breakfastlist.remove(modelRemoved);
                    break;
-                case 'Lunch':
+                case 'lunch':
+                    modelRemoved = this.lunchlist.get(removeid);
                     this.lunchlist.remove(modelRemoved);
                     break;
-                case 'Dinner':
+                case 'dinner':
+                    modelRemoved = this.dinnerlist.get(removeid);
                     this.dinnerlist.remove(modelRemoved);
                     break;
-                case 'Snack':
+                case 'snack':
+                    modelRemoved = this.snacklist.get(removeid);
                     this.snacklist.remove(modelRemoved);
                     break;
 
@@ -189,16 +193,16 @@ $(function() {
 
             var chooseday = '<form>What meal was this part of?: <select id="mySelect"> <option value="Breakfast">Breakfast</option><option value="Lunch">Lunch</option><option value="Dinner">Dinner</option><option value="Snack">Snack</option></select></form><button id="add" type="button">Add To Meal</button><button id="remove" type="button">Remove From Tracked</button>';
 
-            var trackedhtml = '<li' + ' data-id=' + '"' + foodid + '"' + ' class="alltracked">' + "<strong>" + item_name + '</strong>' + ' (' + brand_name + ')' + ' - ' + calorieAmt + ' Calories' + chooseday + '</li>'
+            var trackedhtml = '<li' + ' data-id=' + '"' + foodid + '"' + "<strong>" + item_name + '</strong>' + ' (' + brand_name + ')' + ' - ' + calorieAmt + ' Calories' + chooseday + '</li>'
 
 
-            this.foods.create(new Food({
+            this.foods.create({
                 id: foodid,
                 title: item_name,
                 brand: brand_name,
                 calories: calorieAmt,
                 html: trackedhtml
-            }));
+            });
 
         },
 
@@ -223,7 +227,7 @@ $(function() {
                 total += dish.get('calories');
             }, this)
             $('#breakfast').html(breakfasthtml);
-            $('#totalbreak').html(total);
+            $('#totalbreak span').html(total);
 
 
         },
@@ -236,7 +240,7 @@ $(function() {
                 total += dish.get('calories');
             }, this)
             $('#lunch').html(lunchtml);
-            $('#totalunch').html(total);
+            $('#totalunch span').html(total);
         },
         renderdinner: function(){
             var total = 0;
@@ -247,7 +251,7 @@ $(function() {
                 total += dish.get('calories');
             }, this)
             $('#dinner').html(dinnerhtml);
-            $('#totaldinner').html(total);
+            $('#totaldinner span').html(total);
         },
         rendersnack: function(){
             var total = 0;
@@ -258,7 +262,7 @@ $(function() {
                 total += dish.get('calories');
             }, this)
             $('#snack').html(snackhtml);
-            $('#totalsnack').html(total);
+            $('#totalsnack span').html(total);
         },
 
         render: function() {
