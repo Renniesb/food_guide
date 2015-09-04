@@ -97,10 +97,10 @@ $(function() {
         addClicked: function(e) {
             var $target = $(e.currentTarget).parent();
             var $selected = $target.find('#mySelect').val();
-            var mealClass= $target.attr('class');
+            var mealClass = $target.attr('class');
             var location = $target.attr('data-id');
             var currentFood = this.foods.get(location);
-            var currentBreakfast = this.breakfastlist.get(location) ;
+            var currentBreakfast = this.breakfastlist.get(location);
             var currentLunch = this.lunchlist.get(location);
             var currentDinner = this.dinnerlist.get(location);
             var currentSnack = this.snacklist.get(location);
@@ -115,11 +115,9 @@ $(function() {
 
                     if (currentLunch) {
                         this.lunchlist.remove(currentLunch);
-                    }
-                    else if (currentDinner) {
+                    } else if (currentDinner) {
                         this.dinnerlist.remove(currentDinner);
-                    }
-                    else if (currentSnack) {
+                    } else if (currentSnack) {
                         this.snacklist.remove(currentSnack);
                     }
                     break;
@@ -128,11 +126,9 @@ $(function() {
 
                     if (currentBreakfast) {
                         this.breakfastlist.remove(currentBreakfast);
-                    }
-                    else if (currentDinner) {
+                    } else if (currentDinner) {
                         this.dinnerlist.remove(currentDinner);
-                    }
-                    else if (currentSnack) {
+                    } else if (currentSnack) {
                         this.snacklist.remove(currentSnack);
                     }
                     break;
@@ -141,11 +137,9 @@ $(function() {
 
                     if (currentBreakfast) {
                         this.breakfastlist.remove(currentBreakfast);
-                    }
-                    else if (currentLunch) {
+                    } else if (currentLunch) {
                         this.lunchlist.remove(currentLunch);
-                    }
-                    else if (currentSnack) {
+                    } else if (currentSnack) {
                         this.snacklist.remove(currentSnack);
                     }
                     break;
@@ -154,11 +148,9 @@ $(function() {
 
                     if (currentBreakfast) {
                         this.breakfastlist.remove(currentBreakfast);
-                    }
-                    else if (currentLunch) {
+                    } else if (currentLunch) {
                         this.lunchlist.remove(currentLunch);
-                    }
-                    else if (currentDinner) {
+                    } else if (currentDinner) {
                         this.dinnerlist.remove(currentDinner);
                     }
                     break;
@@ -184,14 +176,11 @@ $(function() {
 
             if (breakfastRemoved) {
                 this.breakfastlist.remove(breakfastRemoved);
-            }
-            else if (lunchRemoved) {
+            } else if (lunchRemoved) {
                 this.lunchlist.remove(lunchRemoved);
-            }
-            else if (dinnerRemoved) {
+            } else if (dinnerRemoved) {
                 this.dinnerlist.remove(dinnerRemoved);
-            }
-            else if (snackRemoved) {
+            } else if (snackRemoved) {
                 this.snacklist.remove(snackRemoved);
             }
         },
@@ -227,7 +216,7 @@ $(function() {
             var brand_name = $target.attr('data-brand');
             var calorieString = $target.attr('data-calories');
             var calorieAmt = parseFloat(calorieString);
-            this.foodid = this.foodid +"1";
+            this.foodid = this.foodid + "1";
 
             var chooseday = '<form>What meal was this part of?: <select id="mySelect"> <option value="Breakfast">Breakfast</option><option value="Lunch">Lunch</option><option value="Dinner">Dinner</option><option value="Snack">Snack</option></select></form><button id="add" type="button">Add To Meal</button><button id="remove" type="button">Remove From Tracked</button>';
 
@@ -260,7 +249,7 @@ $(function() {
             this.$total.html(total);
 
         },
-        renderbreakfast: function(){
+        renderbreakfast: function() {
             var total = 0;
             var breakfasthtml = '';
 
@@ -273,7 +262,7 @@ $(function() {
 
 
         },
-        renderlunch: function(){
+        renderlunch: function() {
             var total = 0;
             var lunchtml = '';
 
@@ -284,7 +273,7 @@ $(function() {
             $('#lunch').html(lunchtml);
             $('#totalunch span').html(total);
         },
-        renderdinner: function(){
+        renderdinner: function() {
             var total = 0;
             var dinnerhtml = '';
 
@@ -295,7 +284,7 @@ $(function() {
             $('#dinner').html(dinnerhtml);
             $('#totaldinner span').html(total);
         },
-        rendersnack: function(){
+        rendersnack: function() {
             var total = 0;
             var snackhtml = '';
 
