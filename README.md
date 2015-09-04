@@ -9,6 +9,6 @@ If you consumed more then one of a certain item you should click on it more then
 
 Once an item is on the Foods Tracked list you can assign it to a meal. Your foods will appear in both the meals and the Foods Tracked lists.
 
-You can run the app at the following link: http://renniesb.github.io/food_guide/index.html
+You can run the app at the following link- http://renniesb.github.io/food_guide/index.html
 
 
