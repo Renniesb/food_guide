@@ -69,7 +69,7 @@ $(function() {
         },
 
         initialize: function() {
-
+            this.foodid = "";
             this.model = new SearchList();
             this.foods = new AllFoods();
             this.breakfastlist = new Breakfast();
@@ -179,30 +179,8 @@ $(function() {
             var lunchRemoved = this.lunchlist.get(removeid);
             var dinnerRemoved = this.dinnerlist.get(removeid);
             var snackRemoved = this.snacklist.get(removeid);
-            var currentmeal = $target.parent();
-            var currentid = currentmeal.attr('id');
+
             this.foods.remove(modelRemoved);
-
-
-            // switch (currentid) {
-            //     case 'breakfast':
-            //         modelRemoved = this.breakfastlist.get(removeid);
-            //        this.breakfastlist.remove(modelRemoved);
-            //        break;
-            //     case 'lunch':
-            //         modelRemoved = this.lunchlist.get(removeid);
-            //         this.lunchlist.remove(modelRemoved);
-            //         break;
-            //     case 'dinner':
-            //         modelRemoved = this.dinnerlist.get(removeid);
-            //         this.dinnerlist.remove(modelRemoved);
-            //         break;
-            //     case 'snack':
-            //         modelRemoved = this.snacklist.get(removeid);
-            //         this.snacklist.remove(modelRemoved);
-            //         break;
-
-            // }
 
             if (breakfastRemoved) {
                 this.breakfastlist.remove(breakfastRemoved);
@@ -249,15 +227,15 @@ $(function() {
             var brand_name = $target.attr('data-brand');
             var calorieString = $target.attr('data-calories');
             var calorieAmt = parseFloat(calorieString);
-            var foodid = $target.attr('data-id');
+            this.foodid = this.foodid +"1";
 
             var chooseday = '<form>What meal was this part of?: <select id="mySelect"> <option value="Breakfast">Breakfast</option><option value="Lunch">Lunch</option><option value="Dinner">Dinner</option><option value="Snack">Snack</option></select></form><button id="add" type="button">Add To Meal</button><button id="remove" type="button">Remove From Tracked</button>';
 
-            var trackedhtml = '<li' + ' data-id=' + '"' + foodid + '"' + "<strong>" + item_name + '</strong>' + ' (' + brand_name + ')' + ' - ' + calorieAmt + ' Calories' + chooseday + '</li>'
+            var trackedhtml = '<li' + ' data-id=' + '"' + this.foodid + '"' + "<strong>" + item_name + '</strong>' + ' (' + brand_name + ')' + ' - ' + calorieAmt + ' Calories' + chooseday + '</li>'
 
 
             this.foods.create({
-                id: foodid,
+                id: this.foodid,
                 title: item_name,
                 brand: brand_name,
                 calories: calorieAmt,
@@ -269,6 +247,10 @@ $(function() {
         rendertracked: function() {
             var total = 0;
             var trackedhtml = '';
+
+            if (this.foods.length == 0) {
+                this.foodid = ""
+            };
 
             this.foods.each(function(food) {
                 trackedhtml = trackedhtml + food.get('html');
@@ -329,7 +311,7 @@ $(function() {
             var terms = this.model;
             var wordhtml = '';
             terms.each(function(term) {
-                wordhtml = wordhtml + '<li' + ' data-id=' + '"' + term.get('_id') + '"' + ' data-name=' + '"' + term.get('fields')['item_name'] + '"' + ' data-brand=' + '"' + term.get('fields')['brand_name'] + '"' + ' data-calories=' + '"' + term.get('fields')['nf_calories'] + '"' + '>' + "<strong>" + term.get('fields')["item_name"] + '</strong>' + ' (' + term.get('fields')["brand_name"] + ')' + ' - ' + term.get('fields')["nf_calories"] + ' Calories' + '</li>'
+                wordhtml = wordhtml + '<li' + ' data-name=' + '"' + term.get('fields')['item_name'] + '"' + ' data-brand=' + '"' + term.get('fields')['brand_name'] + '"' + ' data-calories=' + '"' + term.get('fields')['nf_calories'] + '"' + '>' + "<strong>" + term.get('fields')["item_name"] + '</strong>' + ' (' + term.get('fields')["brand_name"] + ')' + ' - ' + term.get('fields')["nf_calories"] + ' Calories' + '</li>'
             }, this);
             this.$list.html(wordhtml);
 
