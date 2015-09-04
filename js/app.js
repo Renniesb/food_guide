@@ -6,7 +6,6 @@ $(function() {
             title: 'no information found',
             brand: 'no information found',
             calories: 'no information found',
-            day: 'all'
         }
     });
 
@@ -101,10 +100,10 @@ $(function() {
             var mealClass= $target.attr('class');
             var location = $target.attr('data-id');
             var currentFood = this.foods.get(location);
-            var currentBreakfast = this.breakfastlist.get(location) || '';
-            var currentLunch = this.lunchlist.get(location) || '';
-            var currentDinner = this.dinnerlist.get(location) || '';
-            var currentSnack = this.snacklist.get(location) || '';
+            var currentBreakfast = this.breakfastlist.get(location) ;
+            var currentLunch = this.lunchlist.get(location);
+            var currentDinner = this.dinnerlist.get(location);
+            var currentSnack = this.snacklist.get(location);
             var currenthtml = currentFood.get('html');
 
             //replaces class in order to use it later to specifically target items in a specific meal collection
@@ -114,53 +113,53 @@ $(function() {
                 case 'Breakfast':
                     this.breakfastlist.create(currentFood);
 
-                    if (currentFood === currentLunch) {
-                        this.lunchlist.remove(currentFood);
+                    if (currentLunch) {
+                        this.lunchlist.remove(currentLunch);
                     }
-                    else if (currentFood === currentDinner) {
-                        this.dinnerlist.remove(currentFood);
+                    else if (currentDinner) {
+                        this.dinnerlist.remove(currentDinner);
                     }
-                    else if (currentFood === currentSnack) {
-                        this.snacklist.remove(currentFood);
+                    else if (currentSnack) {
+                        this.snacklist.remove(currentSnack);
                     }
                     break;
                 case 'Lunch':
                     this.lunchlist.create(currentFood)
 
-                    if (currentFood === currentBreakfast) {
-                        this.breakfastlist.remove(currentFood);
+                    if (currentBreakfast) {
+                        this.breakfastlist.remove(currentBreakfast);
                     }
-                    else if (currentFood === currentDinner) {
-                        this.dinnerlist.remove(currentFood);
+                    else if (currentDinner) {
+                        this.dinnerlist.remove(currentDinner);
                     }
-                    else if (currentFood === currentSnack) {
-                        this.snacklist.remove(currentFood);
+                    else if (currentSnack) {
+                        this.snacklist.remove(currentSnack);
                     }
                     break;
                 case 'Dinner':
                     this.dinnerlist.create(currentFood);
 
-                    if (currentFood === currentBreakfast) {
-                        this.breakfastlist.remove(currentFood);
+                    if (currentBreakfast) {
+                        this.breakfastlist.remove(currentBreakfast);
                     }
-                    else if (currentFood === currentLunch) {
-                        this.lunchlist.remove(currentFood);
+                    else if (currentLunch) {
+                        this.lunchlist.remove(currentLunch);
                     }
-                    else if (currentFood === currentSnack) {
-                        this.snacklist.remove(currentFood);
+                    else if (currentSnack) {
+                        this.snacklist.remove(currentSnack);
                     }
                     break;
                 case 'Snack':
                     this.snacklist.create(currentFood);
 
-                    if (currentFood === currentBreakfast) {
-                        this.breakfastlist.remove(currentFood);
+                    if (currentBreakfast) {
+                        this.breakfastlist.remove(currentBreakfast);
                     }
-                    else if (currentFood === currentLunch) {
-                        this.lunchlist.remove(currentFood);
+                    else if (currentLunch) {
+                        this.lunchlist.remove(currentLunch);
                     }
-                    else if (currentFood === currentDinner) {
-                        this.dinnerlist.remove(currentFood);
+                    else if (currentDinner) {
+                        this.dinnerlist.remove(currentDinner);
                     }
                     break;
                 default:
