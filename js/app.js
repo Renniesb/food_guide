@@ -69,6 +69,7 @@ $(function() {
         },
 
         initialize: function() {
+            //set up variables used more globally
             this.foodid = "";
             this.model = new SearchList();
             this.foods = new AllFoods();
@@ -76,11 +77,11 @@ $(function() {
             this.lunchlist = new Lunch();
             this.dinnerlist = new Dinner();
             this.snacklist = new Snack();
-            this.prepCollection = _.debounce(this.prepCollection, 1000);
             this.$total = $('#total span');
             this.$list = $('#listing');
             this.$instruct = $('#instruct');
             this.$tracked = $('#tracked');
+            //code to respond to changes in the collections
             this.listenTo(this.foods, 'add', this.rendertracked);
             this.listenTo(this.foods, 'remove', this.rendertracked);
             this.listenTo(this.breakfastlist, 'add', this.renderbreakfast);
@@ -91,25 +92,28 @@ $(function() {
             this.listenTo(this.dinnerlist, 'remove', this.renderdinner);
             this.listenTo(this.snacklist, 'add', this.rendersnack);
             this.listenTo(this.snacklist, 'remove', this.rendersnack);
+            //code to not fire off a request right away
+            this.prepCollection = _.debounce(this.prepCollection, 1000);
 
         },
 
         addClicked: function(e) {
             var $target = $(e.currentTarget).parent();
             var $selected = $target.find('#mySelect').val();
-            var mealClass = $target.attr('class');
             var location = $target.attr('data-id');
+            //tracks the model selected in all of the collections
             var currentFood = this.foods.get(location);
             var currentBreakfast = this.breakfastlist.get(location);
             var currentLunch = this.lunchlist.get(location);
             var currentDinner = this.dinnerlist.get(location);
             var currentSnack = this.snacklist.get(location);
+            //provides the html for the view
             var currenthtml = currentFood.get('html');
 
-            //replaces class in order to use it later to specifically target items in a specific meal collection
-            //currenthtml.removeClass('alltracked').addClass($selected);
-
             switch ($selected) {
+
+                //case statements make sure model is added to the proper meal collection
+                //if elseif statements insure that no other collection except tracked has the same id-No duplicates
                 case 'Breakfast':
                     this.breakfastlist.create(currentFood);
 
@@ -166,6 +170,7 @@ $(function() {
         removeClicked: function(e) {
             var $target = $(e.currentTarget).parent();
             var removeid = $target.attr('data-id');
+            //tracks the models in all of the collections
             var modelRemoved = this.foods.get(removeid);
             var breakfastRemoved = this.breakfastlist.get(removeid);
             var lunchRemoved = this.lunchlist.get(removeid);
@@ -173,7 +178,7 @@ $(function() {
             var snackRemoved = this.snacklist.get(removeid);
 
             this.foods.remove(modelRemoved);
-
+            //remove the model if it exists in a collection
             if (breakfastRemoved) {
                 this.breakfastlist.remove(breakfastRemoved);
             } else if (lunchRemoved) {
@@ -189,6 +194,7 @@ $(function() {
             var name = $('input').val();
             var newUrl = "https://api.nutritionix.com/v1_1/search/" + name + "?results=0%3A20&cal_min=0&cal_max=50000&fields=item_name,brand_name,item_id,nf_calories&appId=26952a04&appKey=33b9262901d0068d4895736b5af19805";
 
+            //populate the collection with models and provide instruction html
             if (name == "") {
                 this.$list.html("")
                 this.$instruct.html("")
@@ -236,7 +242,7 @@ $(function() {
         rendertracked: function() {
             var total = 0;
             var trackedhtml = '';
-
+            //resets the foodid variable when collection is empty to prevent long id names
             if (this.foods.length == 0) {
                 this.foodid = ""
             };
