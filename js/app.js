@@ -101,6 +101,10 @@ $(function() {
             var mealClass= $target.attr('class');
             var location = $target.attr('data-id');
             var currentFood = this.foods.get(location);
+            var currentBreakfast = this.breakfastlist.get(location) || '';
+            var currentLunch = this.lunchlist.get(location) || '';
+            var currentDinner = this.dinnerlist.get(location) || '';
+            var currentSnack = this.snacklist.get(location) || '';
             var currenthtml = currentFood.get('html');
 
             //replaces class in order to use it later to specifically target items in a specific meal collection
@@ -109,15 +113,55 @@ $(function() {
             switch ($selected) {
                 case 'Breakfast':
                     this.breakfastlist.create(currentFood);
+
+                    if (currentFood === currentLunch) {
+                        this.lunchlist.remove(currentFood);
+                    }
+                    else if (currentFood === currentDinner) {
+                        this.dinnerlist.remove(currentFood);
+                    }
+                    else if (currentFood === currentSnack) {
+                        this.snacklist.remove(currentFood);
+                    }
                     break;
                 case 'Lunch':
-                    this.lunchlist.create(currentFood);
+                    this.lunchlist.create(currentFood)
+
+                    if (currentFood === currentBreakfast) {
+                        this.breakfastlist.remove(currentFood);
+                    }
+                    else if (currentFood === currentDinner) {
+                        this.dinnerlist.remove(currentFood);
+                    }
+                    else if (currentFood === currentSnack) {
+                        this.snacklist.remove(currentFood);
+                    }
                     break;
                 case 'Dinner':
-                    this.dinnerlist.create(currentFood)
+                    this.dinnerlist.create(currentFood);
+
+                    if (currentFood === currentBreakfast) {
+                        this.breakfastlist.remove(currentFood);
+                    }
+                    else if (currentFood === currentLunch) {
+                        this.lunchlist.remove(currentFood);
+                    }
+                    else if (currentFood === currentSnack) {
+                        this.snacklist.remove(currentFood);
+                    }
                     break;
                 case 'Snack':
-                    this.snacklist.create(currentFood)
+                    this.snacklist.create(currentFood);
+
+                    if (currentFood === currentBreakfast) {
+                        this.breakfastlist.remove(currentFood);
+                    }
+                    else if (currentFood === currentLunch) {
+                        this.lunchlist.remove(currentFood);
+                    }
+                    else if (currentFood === currentDinner) {
+                        this.dinnerlist.remove(currentFood);
+                    }
                     break;
                 default:
                     alert("Error: try again");
