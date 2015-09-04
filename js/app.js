@@ -175,29 +175,46 @@ $(function() {
             var $target = $(e.currentTarget).parent();
             var removeid = $target.attr('data-id');
             var modelRemoved = this.foods.get(removeid);
+            var breakfastRemoved = this.breakfastlist.get(removeid);
+            var lunchRemoved = this.lunchlist.get(removeid);
+            var dinnerRemoved = this.dinnerlist.get(removeid);
+            var snackRemoved = this.snacklist.get(removeid);
             var currentmeal = $target.parent();
             var currentid = currentmeal.attr('id');
             this.foods.remove(modelRemoved);
 
 
-            switch (currentid) {
-                case 'breakfast':
-                    modelRemoved = this.breakfastlist.get(removeid);
-                   this.breakfastlist.remove(modelRemoved);
-                   break;
-                case 'lunch':
-                    modelRemoved = this.lunchlist.get(removeid);
-                    this.lunchlist.remove(modelRemoved);
-                    break;
-                case 'dinner':
-                    modelRemoved = this.dinnerlist.get(removeid);
-                    this.dinnerlist.remove(modelRemoved);
-                    break;
-                case 'snack':
-                    modelRemoved = this.snacklist.get(removeid);
-                    this.snacklist.remove(modelRemoved);
-                    break;
+            // switch (currentid) {
+            //     case 'breakfast':
+            //         modelRemoved = this.breakfastlist.get(removeid);
+            //        this.breakfastlist.remove(modelRemoved);
+            //        break;
+            //     case 'lunch':
+            //         modelRemoved = this.lunchlist.get(removeid);
+            //         this.lunchlist.remove(modelRemoved);
+            //         break;
+            //     case 'dinner':
+            //         modelRemoved = this.dinnerlist.get(removeid);
+            //         this.dinnerlist.remove(modelRemoved);
+            //         break;
+            //     case 'snack':
+            //         modelRemoved = this.snacklist.get(removeid);
+            //         this.snacklist.remove(modelRemoved);
+            //         break;
 
+            // }
+
+            if (breakfastRemoved) {
+                this.breakfastlist.remove(breakfastRemoved);
+            }
+            else if (lunchRemoved) {
+                this.lunchlist.remove(lunchRemoved);
+            }
+            else if (dinnerRemoved) {
+                this.dinnerlist.remove(dinnerRemoved);
+            }
+            else if (snackRemoved) {
+                this.snacklist.remove(snackRemoved);
             }
         },
 
