@@ -11,30 +11,7 @@ $(function() {
 
     var AllFoods = Backbone.Firebase.Collection.extend({
         model: Food,
-        url: "https://blinding-torch-8751.firebaseio.com/allfoods"
-
     });
-    var Breakfast = Backbone.Firebase.Collection.extend({
-        model: Food,
-        url: "https://blinding-torch-8751.firebaseio.com/breakfast"
-
-    });
-    var Lunch = Backbone.Firebase.Collection.extend({
-        model: Food,
-        url: "https://blinding-torch-8751.firebaseio.com/lunch"
-
-    });
-    var Dinner = Backbone.Firebase.Collection.extend({
-        model: Food,
-        url: "https://blinding-torch-8751.firebaseio.com/dinner"
-
-    });
-    var Snack = Backbone.Firebase.Collection.extend({
-        model: Food,
-        url: "https://blinding-torch-8751.firebaseio.com/snack"
-
-    });
-
 
 
     var SearchList = Backbone.Collection.extend({
@@ -72,10 +49,15 @@ $(function() {
 
             this.model = new SearchList();
             this.foods = new AllFoods();
-            this.breakfastlist = new Breakfast();
-            this.lunchlist = new Lunch();
-            this.dinnerlist = new Dinner();
-            this.snacklist = new Snack();
+            this.foods.url = "https://blinding-torch-8751.firebaseio.com/allfoods"
+            this.breakfastlist = new AllFoods();
+            this.breakfastlist.url = "https://blinding-torch-8751.firebaseio.com/breakfast";
+            this.lunchlist = new AllFoods();
+            this.lunchlist.url = "https://blinding-torch-8751.firebaseio.com/lunch";
+            this.dinnerlist = new AllFoods();
+            this.dinnerlist.url = "https://blinding-torch-8751.firebaseio.com/dinner";
+            this.snacklist = new AllFoods();
+            this.snacklist.url = "https://blinding-torch-8751.firebaseio.com/snack";
             this.prepCollection = _.debounce(this.prepCollection, 1000);
             this.$total = $('#total span');
             this.$list = $('#listing');
